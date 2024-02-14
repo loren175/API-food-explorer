@@ -39,10 +39,69 @@ class DishesController {
 
   async delete(request, response) {
     const { id } = request.params
-    
+
     await knex("dishes").where({ id }).delete()
 
     return response.json()
+  }
+
+  async index(request, response) {
+    const { search } = request.query
+
+    let dishes
+
+    if (search) {
+      const keywords = search.split(" ").map((keyword) => `%${keyword}%`)
+
+      dishes = await knex("dishes")
+        .select([
+          "dishes.id",
+          "dishes.name",
+          "dishes.description",
+          "dishes.category",
+          "dishes.image",
+          "dishes.price",
+        ])
+        .leftJoin("ingredients", "dishes.id", "ingredients.dish_id")
+        .where((builder) => {
+          builder.where((builder2) => {
+            keywords.forEach((keyword) => {
+              builder2.orWhere("dishes.name", "like", keyword)
+              builder2.orWhere("dishes.description", "like", keyword)
+            })
+          })
+          keywords.forEach((keyword) => {
+            builder.orWhere("ingredients.name", "like", keyword)
+          })
+        })
+        .groupBy("dishes.id")
+        .orderBy("dishes.name")
+    } else {
+      dishes = await knex("dishes")
+        .select([
+          "dishes.id",
+          "dishes.name",
+          "dishes.description",
+          "dishes.category",
+          "dishes.price",
+          "dishes.image",
+        ])
+        .orderBy("dishes.name")
+    }
+
+    const dishesIngredients = await knex("ingredients")
+    const dishesWithIngredients = dishes.map((dish) => {
+      const dishIngredients = dishesIngredients.filter(
+        (ingredient) => ingredient.dish_id === dish.id
+      )
+
+      return {
+        ...dish,
+        ingredients: dishIngredients,
+      }
+    })
+
+    return response.json(dishesWithIngredients)
   }
 }
 
