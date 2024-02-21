@@ -19,7 +19,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://127.0.0.1:5173",
-      "https://food-explorer-loren175.netlify.app/",
+      "https://food-explorer-loren175.netlify.app",
     ],
     credentials: true,
   })
