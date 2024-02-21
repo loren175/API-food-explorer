@@ -8,8 +8,8 @@ exports.up = (knex) =>
       .inTable("dishes")
       .onDelete("CASCADE")
 
-      table.integer("created_by").references("id").inTable("users")
-      table.timestamp("created_at").defaultTo(knex.fn.now())
+    table.integer("created_by").references("id").inTable("users")
+    table.timestamp("created_at").defaultTo(knex.fn.now())
   })
 
 exports.down = (knex) => knex.schema.dropTable("ingredients")

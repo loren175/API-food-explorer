@@ -1,4 +1,5 @@
 const knex = require("../database/knex")
+
 const AppError = require("../utils/AppError")
 
 async function checkIfUserIsAdmin(request, response, next) {
@@ -7,10 +8,7 @@ async function checkIfUserIsAdmin(request, response, next) {
   const user = await knex("users").where({ id: user_id }).first()
 
   if (!user.is_admin) {
-    throw new AppError(
-      "Unauthorized.",
-      401
-    )
+    throw new AppError("Unauthorized.", 401)
   }
 
   return next()
