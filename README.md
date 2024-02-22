@@ -6,6 +6,7 @@
 <div align="center"> 
 <a align="center" href="#📁-sobre-o-projeto">Sobre</a> |
 <a align="center" href="#⚙️-tecnologias">Tecnologias</a> |
+<a align="center" href="#🔎-visualização">Visualização</a> |
 <a align="center" href="#📄-tabelas">Tabelas</a> |
 <a align="center" href="#💻-instalação">Instalação</a> |
 <a align="center" href="#📞-contato">Contato</a> 
@@ -32,6 +33,14 @@ O front-end do projeto pode ser acessado por <a href="https://github.com/loren17
 - Cookie-parser
 - Express.js
   - Express-async-errors
+
+## 🔎 Visualização
+
+Para visualizar as rotas com os **HTTP Methods** (GET, POST, PUT, DELETE, ETC) e visualizar o **banco de dados** utilizei os seguintes aplicativos:
+- Insomnia
+- Beekeeper Studio
+
+⚠️ **IMPORTANTE:** No diretório do projeto dentro da pasta **public** há uma exportação do arquivo que utilizei no Insomnia em JSON para visualizar as rotas com todas as configurações feitas.
 
 ## 📄 Tabelas
 
