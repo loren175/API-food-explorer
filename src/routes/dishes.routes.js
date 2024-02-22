@@ -19,9 +19,13 @@ dishesRoutes.post(
   upload.single("image"),
   dishesController.create
 )
+
 dishesRoutes.get("/", dishesController.index)
+
 dishesRoutes.get("/:id", dishesController.show)
+
 dishesRoutes.delete("/:id", checkIfUserIsAdmin, dishesController.delete)
+
 dishesRoutes.patch(
   "/:id",
   checkIfUserIsAdmin,

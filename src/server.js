@@ -13,6 +13,9 @@ const express = require("express")
 const routes = require("./routes")
 
 const app = express()
+
+const PORT = process.env.PORT || 3333
+
 app.use(cookieParser())
 app.use(
   cors({
@@ -47,5 +50,4 @@ app.use((error, request, response, next) => {
   })
 })
 
-const PORT = process.env.PORT || 3333
 app.listen(PORT, () => console.log(`Server is running on Port: ${PORT}`))
